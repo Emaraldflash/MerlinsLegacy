@@ -15,9 +15,8 @@ public class ItemHelmetRed extends ItemArmor implements IArmorTextureProvider{
 	}
 
 	
-	 public String getTextureFile(){
-         return"/mods/MerlinsLegacy/textures/Items/HelmetR.png";
-	  }
+	public void updateIcons(IconRegister par1IconRegister)
+	{ this.iconIndex = par1IconRegister.registerIcon("MerlinsLegacy:HelmetR");}
 
 	@Override
 	public String getArmorTextureFile(ItemStack stack)

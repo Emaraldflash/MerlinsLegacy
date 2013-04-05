@@ -14,11 +14,11 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntitySpriteR extends EntityMob {
+public class EntitySpriteB extends EntityMob {
 
-	public EntitySpriteR(World par1World) {
+	public EntitySpriteB(World par1World) {
 		super(par1World);
-		this.texture = "/mods/MerlinsLegacy/textures/Sprites/SpriteR.png";
+		this.texture = "/mods/MerlinsLegacy/textures/Sprites/SpriteB.png";
 		this.moveSpeed = 0.25f;
 
 	}
@@ -180,7 +180,7 @@ public class EntitySpriteR extends EntityMob {
 			int j = this.rand.nextInt(2 + par2);
 
 			for (int k = 0; k < j; ++k) {
-				this.dropItem(MerlinsLegacy.Rsoul.itemID, 1);
+				this.dropItem(MerlinsLegacy.Bsoul.itemID, 1);
 			}
 		}
 	}

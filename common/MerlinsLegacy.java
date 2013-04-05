@@ -51,7 +51,6 @@ public class MerlinsLegacy {
 	public static Block  ElementiumOre;
 	public static Block  DragoniteOre;
 	//User Blocks
-	public static Block MInfuse;
 	public static Block MagicalFurnace;
 	public static Block MagicalFurnaceOn;
 	public static Block Crafting;
@@ -69,6 +68,11 @@ public class MerlinsLegacy {
 	public static Item ElementiumYellow;
 	public static Item ElementiumPurple;
 	public static Item DragoniteGem;
+	public static Item Rsoul;
+	public static Item Bsoul;
+	public static Item Gsoul;
+	public static Item Ysoul;
+	
 	//Armours
 	public static Item HelmetRed;
 	public static Item PlateRed;
@@ -80,7 +84,6 @@ public class MerlinsLegacy {
 	int ElementiumOreID;
 	int DragoniteOreID;
 	//User Blocks
-	int MInfuseID;
 	int MagicalFurnaceID;
 	int MagicalFurnaceOnID;
 	int CraftingID;
@@ -98,6 +101,11 @@ public class MerlinsLegacy {
 	int ElementiumYellowID;
 	int ElementiumPurpleID;
 	int DragoniteGemID;
+	int RsoulID;
+	int BsoulID;
+	int GsoulID;
+	int YsoulID;
+	
 	//Armours
 	int HelmetRedID;
 	int PlateRedID;
@@ -113,9 +121,8 @@ public class MerlinsLegacy {
 		ElementiumOreID = config.get("Block IDs","Elementium Ore ID", 500).getInt();
 		DragoniteOreID = config.get("Block IDs","Dragonite Ore ID", 501).getInt();
 		//User Blocs
-		MInfuseID = config.get("Block IDs","MInfuse ID", 520).getInt();
-		MagicalFurnaceID= config.get("Block IDs","Magical FurnaceID",521).getInt();
-		MagicalFurnaceOnID= config.get("Block IDs","Magical FurnaceOnID",522).getInt();
+		MagicalFurnaceID= config.get("Block IDs","Magical FurnaceID",522).getInt();
+		MagicalFurnaceOnID= config.get("Block IDs","Magical FurnaceOnID",523).getInt();
 		CraftingID = config.get("Block IDs","Crafting ID", 524).getInt();
 		//Constructors
 		ConstructorID = config.get("Block IDs","Constructor ID", 531).getInt();
@@ -131,6 +138,10 @@ public class MerlinsLegacy {
 		ElementiumYellowID = config.get("Block IDs","Elementium Yellow ID", 514).getInt();
 		ElementiumPurpleID = config.get("Block IDs"," Elementium Purple ID", 515).getInt();
 		DragoniteGemID = config.get("Block IDs","Dragonite Gem ID", 516).getInt();
+		RsoulID = config.get("Block IDs","Fire Elemental Soul ID", 517).getInt();
+		BsoulID = config.get("Block IDs","Water Elemental Soul ID", 518).getInt();
+		GsoulID = config.get("Block IDs","Earth Elemental Soul ID", 519).getInt();
+		YsoulID = config.get("Block IDs","Air Elemental Soul ID", 520).getInt();
 		//Armours
 		HelmetRedID = config.get("Block IDs","Helmet Red ID", 540).getInt();
 		PlateRedID = config.get("Block IDs","Helmet Red ID", 541).getInt();
@@ -153,9 +164,8 @@ public class MerlinsLegacy {
 		ElementiumOre = new BlockElementiumOre(ElementiumOreID, Material.iron).setUnlocalizedName("tileElementiumOre").setLightValue(0.5f).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
 		DragoniteOre = new BlockDragoniteOre(DragoniteOreID, Material.iron).setUnlocalizedName("tileDragoniteOre").setLightValue(0.5f).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
 		//User Blocks
-		MInfuse = new BlockMInfuse(MInfuseID, Material.iron).setUnlocalizedName("tileMInfuse").setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
-		MagicalFurnace = (new BlockMagicalFurnace(521, false)).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("MagicalFurnace").setCreativeTab(MerlinsLegacy.tabMerlinsLegacy);
-		MagicalFurnaceOn = (new BlockMagicalFurnace(522, true)).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("MagicalFurnac");
+		MagicalFurnace = (new BlockMagicalFurnace(522, false)).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setUnlocalizedName("MagicalFurnace").setCreativeTab(MerlinsLegacy.tabMerlinsLegacy);
+		MagicalFurnaceOn = (new BlockMagicalFurnace(523, true)).setHardness(3.5F).setStepSound(Block.soundStoneFootstep).setLightValue(0.875F).setUnlocalizedName("MagicalFurnac");
 		Crafting = new BlockCrafting(CraftingID).setUnlocalizedName("tileCraft").setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
 
 		//Constructors
@@ -173,7 +183,12 @@ public class MerlinsLegacy {
 		ElementiumYellow = new ItemElementiumYellow (ElementiumYellowID).setUnlocalizedName("Air Elementium");
 		ElementiumPurple = new ItemElementiumPurple (ElementiumPurpleID).setUnlocalizedName("Pure Elementium");
 		DragoniteGem = new ItemDragoniteGem (DragoniteGemID).setUnlocalizedName("Dragonite Gem");
+		Rsoul = new ItemRsoul (RsoulID).setUnlocalizedName("Fire Elemental Soul");
+		Bsoul = new ItemBsoul (BsoulID).setUnlocalizedName("Water Elemental Soul");
+		Gsoul = new ItemGsoul (GsoulID).setUnlocalizedName("Earth Elemental Soul");
+		Ysoul = new ItemYsoul (YsoulID).setUnlocalizedName("Air Elemental Soul");
 
+		
 		//Armor Render
 		int renderRedArmor = proxy.addArmor("Red");
 		
@@ -205,7 +220,6 @@ public class MerlinsLegacy {
 
 
 		GameRegistry.addRecipe(new ItemStack(ElementiumPurple, 1), new Object[]{"RXB", "XDX", "GXY", 'R', ElementiumRed , 'B', ElementiumBlue, 'G', ElementiumGreen , 'Y', ElementiumYellow, 'X', ElementiumDull, 'D', DragoniteGem});
-		GameRegistry.addRecipe(new ItemStack(MInfuse, 1), new Object[]{"DXD", "XCX", "DXD",'C', Block.workbench , 'X', Block.obsidian, 'D', ElementiumDull});
 		GameRegistry.addRecipe(new ItemStack(MagicalFurnace, 1), new Object[]{"CCC", "CRC", "CCC", 'C', Constructor, 'R', ElementiumRed});
 		GameRegistry.addRecipe(new ItemStack(Crafting, 1), new Object[]{"CCC", "CRC", "CCC", 'C', Constructor, 'R', ElementiumGreen});
 
@@ -214,6 +228,12 @@ public class MerlinsLegacy {
 		GameRegistry.addRecipe(new ItemStack(ConstructorB, 2), new Object[]{"DXD", "XXX", "DXD", 'X', Constructor, 'D', ElementiumBlue});
 		GameRegistry.addRecipe(new ItemStack(ConstructorY, 2), new Object[]{"DXD", "XXX", "DXD", 'X', Constructor, 'D', ElementiumYellow});
 		GameRegistry.addRecipe(new ItemStack(ConstructorG, 2), new Object[]{"DXD", "XXX", "DXD", 'X', Constructor, 'D', ElementiumGreen});
+		
+		GameRegistry.addRecipe(new ItemStack(ElementiumRed, 1), new Object[]{" X ", "XDX", " X ", 'X', Rsoul, 'D', ElementiumDull});
+		GameRegistry.addRecipe(new ItemStack(ElementiumBlue, 1), new Object[]{" X ", "XDX", " X ", 'X', Bsoul, 'D', ElementiumDull});
+		GameRegistry.addRecipe(new ItemStack(ElementiumGreen, 1), new Object[]{" X ", "XDX", " X ", 'X', Gsoul, 'D', ElementiumDull});
+		GameRegistry.addRecipe(new ItemStack(ElementiumYellow, 1), new Object[]{" X ", "XDX", " X ", 'X', Ysoul, 'D', ElementiumDull});
+
 
 
 	}
@@ -224,7 +244,6 @@ public class MerlinsLegacy {
 		MinecraftForge.setBlockHarvestLevel(DragoniteOre, "pickaxe", 2);
 
 		//User Blocks
-		GameRegistry.registerBlock(MInfuse, "Elemental Infusor");
 		GameRegistry.registerBlock(MagicalFurnace, "Magical Furnace");
 		GameRegistry.registerBlock(MagicalFurnaceOn, "Magical FurnaceOn");
 		GameRegistry.registerBlock(Crafting, "Magical Crafting Table");
@@ -243,6 +262,10 @@ public class MerlinsLegacy {
 		GameRegistry.registerItem(ElementiumYellow, "Air Elementium");
 		GameRegistry.registerItem(ElementiumPurple, "Pure Elementium");
 		GameRegistry.registerItem(DragoniteGem, "Dragonite Gem");
+		GameRegistry.registerItem(Rsoul, "Fire Elemental Soul");
+		GameRegistry.registerItem(Bsoul, "Water Elemental Soul");
+		GameRegistry.registerItem(Gsoul, "Earth Elemental Soul");
+		GameRegistry.registerItem(Ysoul, "Air Elemental Soul");
 
 		//Armours
 		GameRegistry.registerItem(HelmetRed, "Helmet Of Fire");
@@ -258,7 +281,6 @@ public class MerlinsLegacy {
 		LanguageRegistry.addName(ElementiumOre, "Elementium Ore");
 		LanguageRegistry.addName(DragoniteOre, "DragoniteOre");
 		//User Blocks
-		LanguageRegistry.addName(MInfuse, "Elemental Infusor");
 		LanguageRegistry.addName(MagicalFurnace, "Magical Furnace");
 		LanguageRegistry.addName(MagicalFurnaceOn, "Magical FurnaceOn");
 		LanguageRegistry.addName(Crafting, "Magical Crafting Table");
@@ -276,6 +298,10 @@ public class MerlinsLegacy {
 		LanguageRegistry.addName(ElementiumYellow, "Air Elementium");
 		LanguageRegistry.addName(ElementiumPurple, "Pure Elementium");
 		LanguageRegistry.addName(DragoniteGem, "Dragonite Gem");
+		LanguageRegistry.addName(Rsoul, "Fire Elemental Soul");
+		LanguageRegistry.addName(Bsoul, "Water Elemental Soul");
+		LanguageRegistry.addName(Gsoul, "Earth Elemental Soul");
+		LanguageRegistry.addName(Ysoul, "Air Elemental Soul");
 		//Armours
 		LanguageRegistry.addName(HelmetRed, "Helmet Of Fire");
 		LanguageRegistry.addName(PlateRed, "Plate Of Fire");
@@ -287,13 +313,25 @@ public class MerlinsLegacy {
 
 		//Entity Elemental Sprites
 		EntityRegistry.registerModEntity(EntitySpriteR.class, "RedSprite", 1, instance, 80, 3, true);
-		//Entity Spawns
+		EntityRegistry.registerModEntity(EntitySpriteB.class, "BlueSprite", 2, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteG.class, "GreenSprite", 3, instance, 80, 3, true);
+		EntityRegistry.registerModEntity(EntitySpriteY.class, "YellowSprite", 4, instance, 80, 3, true);
+	
 		EntityRegistry.addSpawn(EntitySpriteR.class, 10, 2, 4, EnumCreatureType.monster, BiomeGenBase.plains);
+		EntityRegistry.addSpawn(EntitySpriteB.class, 10, 2, 4, EnumCreatureType.monster, BiomeGenBase.plains);
+		EntityRegistry.addSpawn(EntitySpriteG.class, 10, 2, 4, EnumCreatureType.monster, BiomeGenBase.plains);
+		EntityRegistry.addSpawn(EntitySpriteY.class, 10, 2, 4, EnumCreatureType.monster, BiomeGenBase.plains);
 
 
 		LanguageRegistry.instance().addStringLocalization("entity.MerlinsLegacy.RedSprite.name", "Fire Elemental");
+		LanguageRegistry.instance().addStringLocalization("entity.MerlinsLegacy.BlueSprite.name", "Water Elemental");
+		LanguageRegistry.instance().addStringLocalization("entity.MerlinsLegacy.GreenSprite.name", "Earth Elemental");
+		LanguageRegistry.instance().addStringLocalization("entity.MerlinsLegacy.YellowSprite.name", "Air Elemental");
 		
-		 registerEntityEgg(EntitySpriteR.class, 0xffffff, 0x000000);
+		 registerEntityEgg(EntitySpriteR.class, 0xFC0303, 0x7D2F2F);
+		 registerEntityEgg(EntitySpriteB.class, 0x00FBFF, 0x0058FC);
+		 registerEntityEgg(EntitySpriteG.class, 0x2AFC05, 0x33BF1B);
+		 registerEntityEgg(EntitySpriteY.class, 0xF5ED05, 0xE8E005);
 	} 
 
 
