@@ -2,7 +2,6 @@ package mods.MerlinsLegacy.common;
 
 public class ServerProxy {
 
-	public static String HelmetRPNG = "/mods/MerlinsLegacy/textures/Items/HelmetR.png";
 	
 	public void registerRenderers() {
 		

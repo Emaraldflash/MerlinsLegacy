@@ -1,5 +1,47 @@
 package mods.MerlinsLegacy.common;
-
+//TODO Edit sprite Entity Attack 4
+import mods.MerlinsLegacy.common.Armor.ItemBootsBlue;
+import mods.MerlinsLegacy.common.Armor.ItemBootsGreen;
+import mods.MerlinsLegacy.common.Armor.ItemBootsPurple;
+import mods.MerlinsLegacy.common.Armor.ItemBootsRed;
+import mods.MerlinsLegacy.common.Armor.ItemBootsYellow;
+import mods.MerlinsLegacy.common.Armor.ItemDragoniteGem;
+import mods.MerlinsLegacy.common.Armor.ItemElementium;
+import mods.MerlinsLegacy.common.Armor.ItemElementiumBlue;
+import mods.MerlinsLegacy.common.Armor.ItemElementiumGreen;
+import mods.MerlinsLegacy.common.Armor.ItemElementiumPurple;
+import mods.MerlinsLegacy.common.Armor.ItemElementiumRed;
+import mods.MerlinsLegacy.common.Armor.ItemElementiumYellow;
+import mods.MerlinsLegacy.common.Armor.ItemHelmetBlue;
+import mods.MerlinsLegacy.common.Armor.ItemHelmetGreen;
+import mods.MerlinsLegacy.common.Armor.ItemHelmetPurple;
+import mods.MerlinsLegacy.common.Armor.ItemHelmetRed;
+import mods.MerlinsLegacy.common.Armor.ItemHelmetYellow;
+import mods.MerlinsLegacy.common.Armor.ItemLegsBlue;
+import mods.MerlinsLegacy.common.Armor.ItemLegsGreen;
+import mods.MerlinsLegacy.common.Armor.ItemLegsPurple;
+import mods.MerlinsLegacy.common.Armor.ItemLegsRed;
+import mods.MerlinsLegacy.common.Armor.ItemLegsYellow;
+import mods.MerlinsLegacy.common.Armor.ItemPlateBlue;
+import mods.MerlinsLegacy.common.Armor.ItemPlateGreen;
+import mods.MerlinsLegacy.common.Armor.ItemPlatePurple;
+import mods.MerlinsLegacy.common.Armor.ItemPlateRed;
+import mods.MerlinsLegacy.common.Armor.ItemPlateYellow;
+import mods.MerlinsLegacy.common.Blocks.BLockConstructorB;
+import mods.MerlinsLegacy.common.Blocks.BLockConstructorG;
+import mods.MerlinsLegacy.common.Blocks.BLockConstructorR;
+import mods.MerlinsLegacy.common.Blocks.BLockConstructorY;
+import mods.MerlinsLegacy.common.Blocks.BlockConstructor;
+import mods.MerlinsLegacy.common.Blocks.BlockDragoniteOre;
+import mods.MerlinsLegacy.common.Blocks.BlockElementiumOre;
+import mods.MerlinsLegacy.common.Items.ItemBsoul;
+import mods.MerlinsLegacy.common.Items.ItemGsoul;
+import mods.MerlinsLegacy.common.Items.ItemRsoul;
+import mods.MerlinsLegacy.common.Items.ItemYsoul;
+import mods.MerlinsLegacy.common.mob.entity.EntitySpriteB;
+import mods.MerlinsLegacy.common.mob.entity.EntitySpriteG;
+import mods.MerlinsLegacy.common.mob.entity.EntitySpriteR;
+import mods.MerlinsLegacy.common.mob.entity.EntitySpriteY;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFurnace;
 import net.minecraft.block.BlockObsidian;
@@ -9,6 +51,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityEggInfo;
 import net.minecraft.entity.EntityList;
 import net.minecraft.entity.EnumCreatureType;
+import net.minecraft.inventory.SlotCrafting;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -31,7 +74,7 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "MerlinsLegacy" , name = "MerlinsLegacy" , version = "1.0.0")
+@Mod(modid = "MerlinsLegacy" , name = "MerlinsLegacy" , version = "Alpha")
 @NetworkMod(clientSideRequired = true , serverSideRequired = false)
 
 public class MerlinsLegacy {
@@ -78,10 +121,31 @@ public class MerlinsLegacy {
 	public static Item PlateRed;
 	public static Item LegsRed;
 	public static Item BootsRed;
+	
+	public static Item HelmetBlue;
+	public static Item PlateBlue;
+	public static Item LegsBlue;
+	public static Item BootsBlue;
+	
+	public static Item HelmetGreen;
+	public static Item PlateGreen;
+	public static Item LegsGreen;
+	public static Item BootsGreen;
+	
+	public static Item HelmetYellow;
+	public static Item PlateYellow;
+	public static Item LegsYellow;
+	public static Item BootsYellow;
+	
+	public static Item HelmetPurple;
+	public static Item PlatePurple;
+	public static Item LegsPurple;
+	public static Item BootsPurple;
+	
 
 
 	//Ores
-	int ElementiumOreID;
+	int ElementiumOreID ;
 	int DragoniteOreID;
 	//User Blocks
 	int MagicalFurnaceID;
@@ -111,6 +175,26 @@ public class MerlinsLegacy {
 	int PlateRedID;
 	int LegsRedID;
 	int BootsRedID;
+	
+	int HelmetBlueID;
+	int PlateBlueID;
+	int LegsBlueID;
+	int BootsBlueID;
+	
+	int HelmetYellowID;
+	int PlateYellowID;
+	int LegsYellowID;
+	int BootsYellowID;
+	
+	int HelmetGreenID;
+	int PlateGreenID;
+	int LegsGreenID;
+	int BootsGreenID;
+	
+	int HelmetPurpleID;
+	int PlatePurpleID;
+	int LegsPurpleID;
+	int BootsPurpleID;
 
 	@PreInit
 	public void preInt(FMLPreInitializationEvent event){
@@ -147,7 +231,28 @@ public class MerlinsLegacy {
 		PlateRedID = config.get("Block IDs","Helmet Red ID", 541).getInt();
 		LegsRedID = config.get("Block IDs","Helmet Red ID", 542).getInt();
 		BootsRedID = config.get("Block IDs","Helmet Red ID", 543).getInt();
+		
+		HelmetBlueID = config.get("Block IDs","Helmet Blue ID", 544).getInt();
+		PlateBlueID = config.get("Block IDs","Helmet Blue ID", 545).getInt();
+		LegsBlueID = config.get("Block IDs","Helmet Blue ID", 546).getInt();
+		BootsBlueID = config.get("Block IDs","Helmet Blue ID", 547).getInt();
+		
+		HelmetGreenID = config.get("Block IDs","Helmet Green ID", 548).getInt();
+		PlateGreenID = config.get("Block IDs","Helmet Green ID", 549).getInt();
+		LegsGreenID = config.get("Block IDs","Helmet Green ID", 550).getInt();
+		BootsGreenID = config.get("Block IDs","Helmet Green ID", 551).getInt();
+		
+		HelmetYellowID = config.get("Block IDs","Helmet Yellow ID", 552).getInt();
+		PlateYellowID = config.get("Block IDs","Helmet Yellow ID", 553).getInt();
+		LegsYellowID = config.get("Block IDs","Helmet Yellow ID", 554).getInt();
+		BootsYellowID = config.get("Block IDs","Helmet Yellow ID", 555).getInt();
+		
+		HelmetPurpleID = config.get("Block IDs","Helmet Purple ID", 556).getInt();
+		PlatePurpleID = config.get("Block IDs","Helmet Purple ID", 557).getInt();
+		LegsPurpleID = config.get("Block IDs","Helmet Purple ID", 558).getInt();
+		BootsPurpleID = config.get("Block IDs","Helmet Purple ID", 559).getInt();
 
+		
 
 		NetworkRegistry.instance().registerGuiHandler(this, new GuiHandlerML());
 	}
@@ -157,9 +262,11 @@ public class MerlinsLegacy {
 
 	static EnumArmorMaterial MagicalArmour = EnumHelper.addArmorMaterial("MagicalArmour", 29, new int[] {2, 7, 5, 3}, 9);
 
+	
 	@Init
 	public void load(FMLInitializationEvent event){
 
+		
 		//Ores
 		ElementiumOre = new BlockElementiumOre(ElementiumOreID, Material.iron).setUnlocalizedName("tileElementiumOre").setLightValue(0.5f).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
 		DragoniteOre = new BlockDragoniteOre(DragoniteOreID, Material.iron).setUnlocalizedName("tileDragoniteOre").setLightValue(0.5f).setHardness(3.0F).setResistance(5.0F).setStepSound(Block.soundStoneFootstep);
@@ -191,16 +298,42 @@ public class MerlinsLegacy {
 		
 		//Armor Render
 		int renderRedArmor = proxy.addArmor("Red");
+		int renderBlueArmor = proxy.addArmor("Blue");
+		int renderGreenArmor = proxy.addArmor("Green");
+		int renderYellowArmor = proxy.addArmor("Yellow");
+		int renderPurpleArmor = proxy.addArmor("Purple");
 		
 		proxy.registerRenderers();
 
+
 		//Armour
-		HelmetRed = (ItemArmor)(new ItemArmor(540, EnumArmorMaterial.DIAMOND, renderRedArmor, 0)).setUnlocalizedName("HelmetR");
-		PlateRed = (ItemArmor)(new ItemArmor(541, EnumArmorMaterial.DIAMOND, renderRedArmor, 1)).setUnlocalizedName("PlateRed");
-		LegsRed = (ItemArmor)(new ItemArmor(542, EnumArmorMaterial.DIAMOND, renderRedArmor, 2)).setUnlocalizedName("LegsRed");
-		BootsRed = (ItemArmor)(new ItemArmor(543, EnumArmorMaterial.DIAMOND, renderRedArmor, 3)).setUnlocalizedName("BootsRed");
-
-
+		HelmetRed = new ItemHelmetRed(540, EnumArmorMaterial.DIAMOND, renderRedArmor , 0).setUnlocalizedName("HelmetRed");
+		PlateRed =  new ItemPlateRed(541, EnumArmorMaterial.DIAMOND, renderRedArmor, 1).setUnlocalizedName("PlateRed");
+		LegsRed = new ItemLegsRed(542, EnumArmorMaterial.DIAMOND, renderRedArmor, 2).setUnlocalizedName("LegsRed");
+		BootsRed = new ItemBootsRed(543, EnumArmorMaterial.DIAMOND, renderRedArmor, 3).setUnlocalizedName("BootsRed");
+		
+		HelmetBlue = new ItemHelmetBlue(544, EnumArmorMaterial.DIAMOND, renderBlueArmor , 0).setUnlocalizedName("HelmetBlue");
+		PlateBlue =  new ItemPlateBlue(545, EnumArmorMaterial.DIAMOND, renderBlueArmor, 1).setUnlocalizedName("PlateBlue");
+		LegsBlue = new ItemLegsBlue(546, EnumArmorMaterial.DIAMOND, renderBlueArmor, 2).setUnlocalizedName("LegsBlue");
+		BootsBlue = new ItemBootsBlue(547, EnumArmorMaterial.DIAMOND, renderBlueArmor, 3).setUnlocalizedName("BootsBlue");
+		
+		HelmetGreen = new ItemHelmetGreen(548, EnumArmorMaterial.DIAMOND, renderGreenArmor , 0).setUnlocalizedName("HelmetGreen");
+		PlateGreen =  new ItemPlateGreen(549, EnumArmorMaterial.DIAMOND, renderGreenArmor, 1).setUnlocalizedName("PlateGreen");
+		LegsGreen = new ItemLegsGreen(550, EnumArmorMaterial.DIAMOND, renderGreenArmor, 2).setUnlocalizedName("LegsGreen");
+		BootsGreen = new ItemBootsGreen(551, EnumArmorMaterial.DIAMOND, renderGreenArmor, 3).setUnlocalizedName("BootsGreen");
+		
+		HelmetYellow = new ItemHelmetYellow(552, EnumArmorMaterial.DIAMOND, renderYellowArmor , 0).setUnlocalizedName("HelmetYellow");
+		PlateYellow =  new ItemPlateYellow(553, EnumArmorMaterial.DIAMOND, renderYellowArmor, 1).setUnlocalizedName("PlateYellow");
+		LegsYellow = new ItemLegsYellow(554, EnumArmorMaterial.DIAMOND, renderYellowArmor, 2).setUnlocalizedName("LegsYellow");
+		BootsYellow = new ItemBootsYellow(555, EnumArmorMaterial.DIAMOND, renderYellowArmor, 3).setUnlocalizedName("BootsYellow");
+		
+		HelmetPurple = new ItemHelmetPurple(556, EnumArmorMaterial.DIAMOND, renderPurpleArmor , 0).setUnlocalizedName("HelmetPurple");
+		PlatePurple =  new ItemPlatePurple(557, EnumArmorMaterial.DIAMOND, renderPurpleArmor, 1).setUnlocalizedName("PlatePurple");
+		LegsPurple = new ItemLegsPurple(558, EnumArmorMaterial.DIAMOND, renderPurpleArmor, 2).setUnlocalizedName("LegsPurple");
+		BootsPurple = new ItemBootsPurple(559, EnumArmorMaterial.DIAMOND, renderPurpleArmor, 3).setUnlocalizedName("BootsPurple");
+		
+		
+		
 		GameRegistry.registerTileEntity( TileEntityMFurnace.class, "Magical Furnace");
 
 		gameRegisters();
@@ -272,6 +405,26 @@ public class MerlinsLegacy {
 		GameRegistry.registerItem(PlateRed, "Plate Of Fire");
 		GameRegistry.registerItem(LegsRed, "Legs Of Fire");
 		GameRegistry.registerItem(BootsRed, "Boots Of Fire");
+		
+		GameRegistry.registerItem(HelmetBlue, "Helmet Of Water");
+		GameRegistry.registerItem(PlateBlue, "Plate Of Water");
+		GameRegistry.registerItem(LegsBlue, "Legs Of Water");
+		GameRegistry.registerItem(BootsBlue, "Boots Of Water");
+		
+		GameRegistry.registerItem(HelmetGreen, "Helmet Of Earth");
+		GameRegistry.registerItem(PlateGreen, "Plate Of Earth");
+		GameRegistry.registerItem(LegsGreen, "Legs Of Earth");
+		GameRegistry.registerItem(BootsGreen, "Boots Of Earth");
+		
+		GameRegistry.registerItem(HelmetYellow, "Helmet Of Air");
+		GameRegistry.registerItem(PlateYellow, "Plate Of Air");
+		GameRegistry.registerItem(LegsYellow, "Legs Of Air");
+		GameRegistry.registerItem(BootsYellow, "Boots Of Air");
+		
+		GameRegistry.registerItem(HelmetPurple, "Helmet Of Pure Magic");
+		GameRegistry.registerItem(PlatePurple, "Plate Of Pure Magic");
+		GameRegistry.registerItem(LegsPurple, "Legs Of Pure Magic");
+		GameRegistry.registerItem(BootsPurple, "Boots Of Pure Magic");
 
 
 	}
@@ -307,6 +460,27 @@ public class MerlinsLegacy {
 		LanguageRegistry.addName(PlateRed, "Plate Of Fire");
 		LanguageRegistry.addName(LegsRed, "Legs Of Fire");
 		LanguageRegistry.addName(BootsRed, "Boots Of Fire");
+		
+		LanguageRegistry.addName(HelmetBlue, "Helmet Of Water");
+		LanguageRegistry.addName(PlateBlue, "Plate Of Water");
+		LanguageRegistry.addName(LegsBlue, "Legs Of Water");
+		LanguageRegistry.addName(BootsBlue, "Boots Of Water");
+		
+		LanguageRegistry.addName(HelmetGreen, "Helmet Of Earth");
+		LanguageRegistry.addName(PlateGreen, "Plate Of Earth");
+		LanguageRegistry.addName(LegsGreen, "Legs Of Earth");
+		LanguageRegistry.addName(BootsGreen, "Boots Of Earth");
+		
+		LanguageRegistry.addName(HelmetYellow, "Helmet Of Air");
+		LanguageRegistry.addName(PlateYellow, "Plate Of Air");
+		LanguageRegistry.addName(LegsYellow, "Legs Of Air");
+		LanguageRegistry.addName(BootsYellow, "Boots Of Air");
+		
+		LanguageRegistry.addName(HelmetPurple, "Helmet Of Pure Magic");
+		LanguageRegistry.addName(PlatePurple, "Plate Of Pure Magic");
+		LanguageRegistry.addName(LegsPurple, "Legs Of Pure Magic");
+		LanguageRegistry.addName(BootsPurple, "Boots Of Pure Magic");
+		
 
 		LanguageRegistry.instance().addStringLocalization("Merlins Legacy", "en_US", "Merlins Legacy");
 
