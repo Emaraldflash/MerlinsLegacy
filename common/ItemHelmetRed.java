@@ -6,7 +6,7 @@ import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IArmorTextureProvider;
 
-public class ItemHelmetRed extends ItemArmor implements IArmorTextureProvider{
+public class ItemHelmetRed extends ItemArmor implements IArmorTextureProvider {
 
 	public ItemHelmetRed(int par1, EnumArmorMaterial par2EnumArmorMaterial,
 			int par3, int par4) {
@@ -14,24 +14,19 @@ public class ItemHelmetRed extends ItemArmor implements IArmorTextureProvider{
 		this.setCreativeTab(MerlinsLegacy.tabMerlinsLegacy);
 	}
 
-	
-	public void updateIcons(IconRegister par1IconRegister)
-	{ this.iconIndex = par1IconRegister.registerIcon("MerlinsLegacy:HelmetR");}
-
 	@Override
-	public String getArmorTextureFile(ItemStack stack)
-	{
-		if(stack.itemID == MerlinsLegacy.HelmetRed.itemID || stack.itemID == MerlinsLegacy.PlateRed.itemID ||
-				stack.itemID == MerlinsLegacy.BootsRed.itemID)
-		{
+	public String getArmorTextureFile(ItemStack stack) {
+		if (stack.itemID == MerlinsLegacy.HelmetRed.itemID
+				|| stack.itemID == MerlinsLegacy.PlateRed.itemID
+				|| stack.itemID == MerlinsLegacy.BootsRed.itemID) {
 			return "/mods/MerlinsLegacy/textures/Armour/Red_1.png";
-		}
-		else if(stack.itemID == MerlinsLegacy.LegsRed.itemID)
-		{
+		} else if (stack.itemID == MerlinsLegacy.LegsRed.itemID) {
 			return "/mods/MerlinsLegacy/textures/Armour/Red_2.png";
 		}
 		return "/mods/MerlinsLegacy/textures/Armour/Red_2.png";
 	}
+
+	public String getTextureFile() {
+		return ("/mods/MerlinsLegacy/textures/Items/HelmetR.png");
+	}
 }
-
-

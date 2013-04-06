@@ -195,7 +195,7 @@ public class MerlinsLegacy {
 		proxy.registerRenderers();
 
 		//Armour
-		HelmetRed = (ItemArmor)(new ItemArmor(540, EnumArmorMaterial.DIAMOND, renderRedArmor, 0)).setUnlocalizedName("HelmetRed");
+		HelmetRed = (ItemArmor)(new ItemArmor(540, EnumArmorMaterial.DIAMOND, renderRedArmor, 0)).setUnlocalizedName("HelmetR");
 		PlateRed = (ItemArmor)(new ItemArmor(541, EnumArmorMaterial.DIAMOND, renderRedArmor, 1)).setUnlocalizedName("PlateRed");
 		LegsRed = (ItemArmor)(new ItemArmor(542, EnumArmorMaterial.DIAMOND, renderRedArmor, 2)).setUnlocalizedName("LegsRed");
 		BootsRed = (ItemArmor)(new ItemArmor(543, EnumArmorMaterial.DIAMOND, renderRedArmor, 3)).setUnlocalizedName("BootsRed");
@@ -311,7 +311,7 @@ public class MerlinsLegacy {
 		LanguageRegistry.instance().addStringLocalization("Merlins Legacy", "en_US", "Merlins Legacy");
 
 
-		//Entity Elemental Sprites
+		//Entity Elemental Spites
 		EntityRegistry.registerModEntity(EntitySpriteR.class, "RedSprite", 1, instance, 80, 3, true);
 		EntityRegistry.registerModEntity(EntitySpriteB.class, "BlueSprite", 2, instance, 80, 3, true);
 		EntityRegistry.registerModEntity(EntitySpriteG.class, "GreenSprite", 3, instance, 80, 3, true);

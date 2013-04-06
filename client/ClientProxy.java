@@ -1,5 +1,6 @@
 package mods.MerlinsLegacy.client;
 
+import net.minecraftforge.client.MinecraftForgeClient;
 import mods.MerlinsLegacy.common.EntitySpriteB;
 import mods.MerlinsLegacy.common.EntitySpriteG;
 import mods.MerlinsLegacy.common.EntitySpriteR;
@@ -16,7 +17,7 @@ public class ClientProxy extends ServerProxy {
 	
 	@Override
 	public void registerRenderers() {
-		
+		MinecraftForgeClient.preloadTexture(HelmetRPNG);
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteR.class, new RenderSpriteR(new ModelSprite(), 0.1f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteB.class, new RenderSpriteB(new ModelSprite(), 0.1f));
 		RenderingRegistry.registerEntityRenderingHandler(EntitySpriteG.class, new RenderSpriteG(new ModelSprite(), 0.1f));

@@ -3,10 +3,14 @@ package mods.MerlinsLegacy.common;
 import java.util.Calendar;
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.projectile.EntitySmallFireball;
 import net.minecraft.item.Item;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.ChunkCoordinates;
@@ -16,173 +20,131 @@ import net.minecraft.world.World;
 
 public class EntitySpriteB extends EntityMob {
 
+	  
+    private float heightOffset = 0.5F;
+
+    
+    private int heightOffsetUpdateTime;
+    private int field_70846_g;
+	
 	public EntitySpriteB(World par1World) {
 		super(par1World);
 		this.texture = "/mods/MerlinsLegacy/textures/Sprites/SpriteB.png";
-		this.moveSpeed = 0.25f;
+		this.moveSpeed = 10.25f;
 
-	}
-	
-	private ChunkCoordinates currentFlightTarget;
+	 }
 
-	protected void entityInit() {
-		super.entityInit();
-		this.dataWatcher.addObject(16, new Byte((byte) 0));
-	}
+    public int getMaxHealth()
+    {
+        return 20;
+    }
 
-	protected float getSoundVolume() {
-		return 0.1F;
-	}
+    protected void entityInit()
+    {
+        super.entityInit();
+        this.dataWatcher.addObject(16, new Byte((byte)0));
+    }
 
-	protected float getSoundPitch() {
-		return super.getSoundPitch() * 0.95F;
-	}
+  
+    protected String getLivingSound()
+    {
+        return "mob.bat.idle";
+    }
 
-	protected String getLivingSound() {
-		return this.rand.nextInt(4) != 0 ? null : "mob.bat.idle";
-	}
+    protected String getHurtSound()
+    {
+        return "mob.blaze.hit";
+    }
 
-	protected String getHurtSound() {
-		return "mob.blaze.hurt";
-	}
+    protected String getDeathSound()
+    {
+        return "mob.bat.death";
+    }
 
-	protected String getDeathSound() {
-		return "mob.bat.death";
-	}
+    @SideOnly(Side.CLIENT)
+    public int getBrightnessForRender(float par1)
+    {
+        return 15728880;
+    }
 
-	public boolean canBePushed() {
-		return false;
-	}
+    public float getBrightness(float par1)
+    {
+        return 1.0F;
+    }
 
-	protected void collideWithEntity(Entity par1Entity) {
-	}
 
-	protected void func_85033_bc() {
-	}
+    public boolean attackEntityAsMob(Entity par1Entity)
+    {
+        boolean flag = super.attackEntityAsMob(par1Entity);
 
-	public int getMaxHealth() {
-		return 10;
-	}
+        if (flag && this.getHeldItem() == null && this.isBurning() && this.rand.nextFloat() < (float)this.worldObj.difficultySetting * 0.3F)
+        {
+            par1Entity.setFire(2 * this.worldObj.difficultySetting);
+        }
 
-	public int getTotalArmorValue() {
-		return 4;
-	}
+        return flag;
+    }
 
-	public int getAttackStrength(Entity par1Entity) {
-		return 10;
-	}
 
-	protected boolean isAIEnabled() {
-		return true;
-	}
+   
+    protected void fall(float par1) {}
 
-	public void onUpdate() {
-		super.onUpdate();
-		this.motionY *= 0.6000000238418579D;
-	}
+    
+    protected int getDropItemId()
+    {
+        return MerlinsLegacy.Bsoul.itemID;
+    }
 
-	protected void updateAITasks() {
-		super.updateAITasks();
+    
+    public boolean isBurning()
+    {
+        return this.func_70845_n();
+    }
 
-		if (this.currentFlightTarget != null
-				&& (!this.worldObj.isAirBlock(this.currentFlightTarget.posX,
-						this.currentFlightTarget.posY,
-						this.currentFlightTarget.posZ) || this.currentFlightTarget.posY < 1)) {
-			this.currentFlightTarget = null;
-		}
+   
+    protected void dropFewItems(boolean par1, int par2)
+    {
+        if (par1)
+        {
+            int j = this.rand.nextInt(2 + par2);
 
-		if (this.currentFlightTarget == null
-				|| this.rand.nextInt(30) == 0
-				|| this.currentFlightTarget.getDistanceSquared((int) this.posX,
-						(int) this.posY, (int) this.posZ) < 4.0F) {
-			this.currentFlightTarget = new ChunkCoordinates((int) this.posX
-					+ this.rand.nextInt(7) - this.rand.nextInt(7),
-					(int) this.posY + this.rand.nextInt(6) - 2, (int) this.posZ
-							+ this.rand.nextInt(7) - this.rand.nextInt(7));
-		}
+            for (int k = 0; k < j; ++k)
+            {
+                this.dropItem(MerlinsLegacy.Bsoul.itemID, 1);
+            }
+        }
+    }
 
-		double d0 = (double) this.currentFlightTarget.posX + 0.5D - this.posX;
-		double d1 = (double) this.currentFlightTarget.posY + 0.1D - this.posY;
-		double d2 = (double) this.currentFlightTarget.posZ + 0.5D - this.posZ;
-		this.motionX += (Math.signum(d0) * 0.5D - this.motionX) * 0.10000000149011612D;
-		this.motionY += (Math.signum(d1) * 0.699999988079071D - this.motionY) * 0.10000000149011612D;
-		this.motionZ += (Math.signum(d2) * 0.5D - this.motionZ) * 0.10000000149011612D;
-		float f = (float) (Math.atan2(this.motionZ, this.motionX) * 180.0D / Math.PI) - 90.0F;
-		float f1 = MathHelper.wrapAngleTo180_float(f - this.rotationYaw);
-		this.moveForward = 0.5F;
-		this.rotationYaw += f1;
-	}
+    public boolean func_70845_n()
+    {
+        return (this.dataWatcher.getWatchableObjectByte(16) & 1) != 0;
+    }
 
-	protected boolean canTriggerWalking() {
-		return false;
-	}
+    public void func_70844_e(boolean par1)
+    {
+        byte b0 = this.dataWatcher.getWatchableObjectByte(16);
 
-	protected void fall(float par1) {
-	}
+        if (par1)
+        {
+            b0 = (byte)(b0 | 1);
+        }
+        else
+        {
+            b0 &= -2;
+        }
 
-	protected void updateFallState(double par1, boolean par3) {
-	}
+        this.dataWatcher.updateObject(16, Byte.valueOf(b0));
+    }
 
-	public boolean doesEntityNotTriggerPressurePlate() {
-		return true;
-	}
+   
+    protected boolean isValidLightLevel()
+    {
+        return true;
+    }
 
-	public boolean attackEntityFrom(DamageSource par1DamageSource, int par2) {
-		if (this.isEntityInvulnerable()) {
-			return false;
-		} else {
-			return super.attackEntityFrom(par1DamageSource, par2);
-		}
-	}
-
-	public void readEntityFromNBT(NBTTagCompound par1NBTTagCompound) {
-		super.readEntityFromNBT(par1NBTTagCompound);
-		this.dataWatcher.updateObject(16,
-				Byte.valueOf(par1NBTTagCompound.getByte("BatFlags")));
-	}
-
-	public void writeEntityToNBT(NBTTagCompound par1NBTTagCompound) {
-		super.writeEntityToNBT(par1NBTTagCompound);
-		par1NBTTagCompound.setByte("BatFlags",
-				this.dataWatcher.getWatchableObjectByte(16));
-	}
-
-	public boolean getCanSpawnHere() {
-		int i = MathHelper.floor_double(this.boundingBox.minY);
-
-		if (i >= 63) {
-			return false;
-		} else {
-			int j = MathHelper.floor_double(this.posX);
-			int k = MathHelper.floor_double(this.posZ);
-			int l = this.worldObj.getBlockLightValue(j, i, k);
-			byte b0 = 4;
-			Calendar calendar = this.worldObj.getCurrentDate();
-
-			if ((calendar.get(2) + 1 != 10 || calendar.get(5) < 20)
-					&& (calendar.get(2) + 1 != 11 || calendar.get(5) > 3)) {
-				if (this.rand.nextBoolean()) {
-					return false;
-				}
-			} else {
-				b0 = 7;
-			}
-
-			return l > this.rand.nextInt(b0) ? false : super.getCanSpawnHere();
-		}
-	}
-
-	public void initCreature() {
-	}
-
-	protected void dropFewItems(boolean par1, int par2) {
-		if (par1) {
-			int j = this.rand.nextInt(2 + par2);
-
-			for (int k = 0; k < j; ++k) {
-				this.dropItem(MerlinsLegacy.Bsoul.itemID, 1);
-			}
-		}
-	}
-
+   
+    public int getAttackStrength(Entity par1Entity)
+    {
+        return 6;
+    }
 }
