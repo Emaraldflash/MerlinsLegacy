@@ -47,7 +47,7 @@ public class BlockCrafting extends BlockWorkbench
 		}
 		else
 		{
-			par5EntityPlayer.displayGUIWorkbench(par2, par3, par4);
+			par5EntityPlayer.openGui(MerlinsLegacy.instance, par6, par1World, par6, par6, par6);
 			return true;
 		}
 	}

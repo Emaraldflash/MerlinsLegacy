@@ -1,5 +1,5 @@
 package mods.MerlinsLegacy.common;
-//TODO Edit sprite Entity Attack 4
+//TODO Edit sprite Entity Attack 4 for all but the BLue sprite
 import mods.MerlinsLegacy.common.Armor.ItemBootsBlue;
 import mods.MerlinsLegacy.common.Armor.ItemBootsGreen;
 import mods.MerlinsLegacy.common.Armor.ItemBootsPurple;
